@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter, Link, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route, Redirect, Switch, withRouter } from 'react-router-dom';
 import '../components/App.scss';
 import LoginNav from '../components/loginNav/LoginNav.js'
 import Main from '../components/main/Main.js'
@@ -41,18 +41,18 @@ class App extends Component {
     return (
       <div className="App">
         <ReactNotification />
-        <BrowserRouter>
-          <Link id="loginNavLink" to="/nav"></Link>
-          <Link id="mainLink" to="/main"></Link>
+        <Link id="loginNavLink" to="/nav"></Link>
+        <Link id="mainLink" to="/main"></Link>
           
 
-          <Route render={() => (
-            <LoginNav onSuccess={ this.handleSuccessfulLogin } />
-          )} exact path="/nav"></Route>
-          <Route render={() => (
-            <Main onSignOut={ this.handleSignOut } />
-          )} exact path="/main"></Route>
-        </BrowserRouter>
+          <Switch>
+            <Route render={() => (
+              <LoginNav onSuccess={ this.handleSuccessfulLogin } />
+            )} exact path="/nav"></Route>
+            <Route render={() => (
+              <Main onSignOut={ this.handleSignOut } />
+            )} exact path="/main"></Route>
+          </Switch>
       </div>
     )
   }
@@ -74,4 +74,4 @@ class App extends Component {
   }
 }
 
-export default connect()(App)
+export default connect()(withRouter(App))

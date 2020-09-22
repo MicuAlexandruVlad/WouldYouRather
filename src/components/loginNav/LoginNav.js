@@ -3,58 +3,72 @@ import './LoginNav.scss'
 import Login from '../login/Login.js'
 import Register from '../register/Register.js'
 import logo from '../../assets/logo.png'
-import * as $ from 'jquery'
-import { BrowserRouter, Link, Route } from 'react-router-dom'
+import { BrowserRouter as Router,
+    Link, 
+    Redirect, 
+    Route, 
+    Switch,
+    withRouter,
+} from 'react-router-dom'
 
-export default class LoginNav extends Component {
 
-    componentDidMount() {
-        this.onNavLogin()
+
+class LoginNav extends Component {
+
+
+    // 1 = login, 2 = register
+    state = {
+        pathIndex: 1
     }
 
     render() {
         return (
-            <div className="navBody flex-col">
-                <div className="top flex-row">
-                    <img src={ logo } alt="logo" className="logo"/>
-                    <span>WouldYouRather</span>
-                    <div className="btns flex-row">
-                        <button 
-                            onClick={() => { this.onNavLogin() }} 
-                            id="btnLogin" 
-                            className="top-action">Login</button>
-                        <button 
-                            onClick={() => { this.onNavRegister() }} 
-                            id="btnRegister" 
-                            className="top-action">Register</button>
-                    </div>
+            <Router>
+                <Redirect to="/nav/login" />
+                <div className="navBody flex-col">
+                        <div className="top flex-row">
+                            <img src={ logo } alt="logo" className="logo"/>
+                            <span>WouldYouRather</span>
+                            <div className="btns flex-row">
+                                <Link 
+                                    className={ 
+                                        this.state.pathIndex === 1 ? "top-action active" : "top-action"
+                                    }
+                                    onClick={ () => {
+                                        this.setState({
+                                            pathIndex: 1
+                                        })
+                                    } } 
+                                    id="linkLogin" 
+                                    to="/nav/login">Login</Link>
+                                <Link 
+                                    className={ 
+                                        this.state.pathIndex === 2 ? "top-action active" : "top-action"
+                                    }
+                                    onClick={ () => {
+                                        this.setState({
+                                            pathIndex: 2
+                                        })
+                                    } }
+                                    id="linkRegister" 
+                                    to="/nav/register">Register</Link>
+                            </div>
+                        </div>
+
+                        <Switch>
+                            <Route render={() => (
+                                <Login onSuccess={ this.props.onSuccess } />
+                            )} exact path="/nav/login"></Route>
+
+                            <Route render={() => (
+                                <Register />
+                            )} exact path="/nav/register"></Route>
+                        </Switch>
+                            
                 </div>
-                <BrowserRouter>
-                    <Link id="linkLogin" to="/login">Login</Link>
-                    <Link id="linkRegister" to="/register">Register</Link>
-
-                    <Route render={() => (
-                        <Login onSuccess={ this.props.onSuccess } />
-                    )} exact path="/login"></Route>
-
-                    <Route render={() => (
-                        <Register />
-                    )} exact path="/register"></Route>
-                
-                </BrowserRouter>
-            </div>
+            </Router>
         )
     }
-
-    onNavLogin() {
-        $("#btnLogin").addClass("active")
-        $("#btnRegister").removeClass("active")
-        $("#linkLogin")[0].click()
-    }
-
-    onNavRegister() {
-        $("#btnLogin").removeClass("active")
-        $("#btnRegister").addClass("active")
-        $("#linkRegister")[0].click()
-    }
 }
+
+export default withRouter(LoginNav)

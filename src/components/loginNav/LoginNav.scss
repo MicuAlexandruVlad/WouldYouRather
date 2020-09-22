@@ -40,8 +40,10 @@ $secondary: #FFB742;
                 padding-bottom: 1.3rem;
                 outline: none;
                 border: none;
+                color: black;
                 background-color: white;
                 cursor: pointer;
+                text-decoration: none;
                 transition: .2s ease-out;
 
                 &:hover {
