@@ -1,0 +1,37 @@
+$main: #2469AE;
+$secondary: #FFB742;
+
+.home-body {
+    width: 100%;
+    align-items: center;
+    overflow-y: auto;
+    margin-left: 115px;
+    
+
+    .link-holder {
+        margin-top: 3rem;
+        margin-bottom: 4rem;
+        box-shadow: 0px 0px 12px 3px rgba(0, 0, 0, 0.075);
+
+        a {
+            color: black;
+            background-color: white;
+            text-decoration: none;
+            padding-right: 1rem;
+            padding-left: 1rem;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            transition: .2s ease-out;
+            
+            &:hover {
+                background-color: $main;
+                color: white;
+            }
+        }
+
+        .active {
+            background-color: $main;
+            color: white;
+        }
+    }
+}

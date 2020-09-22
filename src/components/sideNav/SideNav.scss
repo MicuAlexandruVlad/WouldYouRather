@@ -1,0 +1,67 @@
+$main: #2469AE;
+$secondary: #FFB742;
+
+
+.side-nav-body {
+    height: 100vh;
+    width: 115px;
+    background-color: white;
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    
+
+    .icon-bg {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        margin-left: auto;
+        margin-right: auto;
+
+        .nav-icon {
+            object-fit: contain;
+            width: 36px;
+            height: 36px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .icon-text {
+            font-size: .85em;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 1rem;
+            text-align: center;
+        }
+    }
+
+    .icon-hover {
+        transition: .2s ease-out;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #114378;
+            color: white;
+
+            .nav-icon {
+                filter: brightness(10);
+            }
+        }
+    }
+
+    .logout {
+        cursor: pointer;
+    }
+}
+
+.mid {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.active {
+    background-color: #114378;
+    color: white;
+
+    .nav-icon {
+        filter: brightness(10);
+    }
+}

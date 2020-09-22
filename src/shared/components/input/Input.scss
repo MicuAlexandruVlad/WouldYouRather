@@ -1,0 +1,40 @@
+
+$main: #2469AE;
+$secondary: #FFB742;
+
+.input-body {
+    border-bottom: 1px solid $secondary;
+    background-color: #2469ae08;
+    padding-left: .4rem;
+    padding-right: .4rem;
+    cursor: text;
+    transition: .1s ease-out;
+    margin-bottom: 1rem;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+
+    label {
+        cursor: text;
+        font-size: .9em;
+        padding-top: .4rem;
+    }
+
+    input {
+        height: 30px;
+        outline: none;
+        border: none;
+        background-color: transparent;
+        font-size: 1em;
+        font-weight: 400;
+        padding-top: .4rem;
+        padding-bottom: .4rem;
+    }
+
+    &:hover, &:focus, &:active {
+        background-color: #2469ae18;
+    }
+
+    .active {
+        background-color: #2469ae18;
+    }
+}
