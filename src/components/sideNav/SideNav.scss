@@ -15,6 +15,7 @@ $secondary: #FFB742;
         padding-bottom: 1rem;
         margin-left: auto;
         margin-right: auto;
+        text-decoration: none;
 
         .nav-icon {
             object-fit: contain;
@@ -30,6 +31,7 @@ $secondary: #FFB742;
             margin-right: auto;
             margin-top: 1rem;
             text-align: center;
+        
         }
     }
 
@@ -59,9 +61,13 @@ $secondary: #FFB742;
 
 .active {
     background-color: #114378;
-    color: white;
-
+    
     .nav-icon {
+        filter: brightness(10);
+    }
+    
+    .icon-text {
+        color: white;
         filter: brightness(10);
     }
 }

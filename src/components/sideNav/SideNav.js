@@ -12,35 +12,12 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { Link, NavLink } from 'react-router-dom'
 
 export default class SideNav extends Component {
 
     state = {
         dialogOpen: false
-    }
-
-    onHome() {
-        this.props.onHome()
-
-        $("#home").addClass("active")
-        $("#newQuestion").removeClass("active")
-        $("#leaderboard").removeClass("active")
-    }
-
-    onNewQuestion() {
-        this.props.onNewQuestion()
-
-        $("#home").removeClass("active")
-        $("#newQuestion").addClass("active")
-        $("#leaderboard").removeClass("active")
-    }
-
-    onLeaderboard() {
-        this.props.onLeaderboard()
-
-        $("#home").removeClass("active")
-        $("#newQuestion").removeClass("active")
-        $("#leaderboard").addClass("active")
     }
 
     handleDialogClose() {
@@ -67,22 +44,40 @@ export default class SideNav extends Component {
     render() {
         return (
             <div className="side-nav-body flex-col">
+                
+               
                 <div className="icon-bg">
                     <img src={ logo } alt="logo" className="nav-icon"/>
                 </div>
                 <div className="mid">
-                    <div id="home" onClick={ () => this.onHome() } className="icon-bg icon-hover flex-col active">
-                        <img src={ homeIcon } alt="home" className="nav-icon"/>
-                        <span className="icon-text">Home</span>
-                    </div>
-                    <div id="newQuestion" onClick={ () => this.onNewQuestion() } className="icon-bg icon-hover flex-col">
-                        <img src={ newQuestionIcon } alt="newQuestion" className="nav-icon"/>
-                        <span className="icon-text">New Question</span>
-                    </div>
-                    <div id="leaderboard" onClick={ () => this.onLeaderboard() } className="icon-bg icon-hover flex-col">
-                        <img src={ leaderboardIcon } alt="leaderboard" className="nav-icon"/>
-                        <span className="icon-text">Leaderboard</span>
-                    </div>
+                    <NavLink 
+                        className="icon-bg icon-hover flex-col"
+                        activeClassName="active"
+                        to="/home">
+                        <div className="link-holder flex-col">
+                            <img src={ homeIcon } alt="home" className="nav-icon"/>
+                            <span className="icon-text">Home</span>
+                        </div>
+                    </NavLink>
+                    <NavLink 
+                        className="icon-bg icon-hover flex-col"
+                        activeClassName="active"
+                        to="/add">
+                        <div className="link-holder flex-col">
+                            <img src={ newQuestionIcon } alt="newQuestion" className="nav-icon"/>
+                            <span className="icon-text">New Question</span>
+                        </div>
+                    </NavLink>
+                    <NavLink 
+                        className="icon-bg icon-hover flex-col"
+                        activeClassName="active"
+                        to="/leaderboard">
+                        <div className="link-holder flex-col">
+                            <img src={ leaderboardIcon } alt="leaderboard" className="nav-icon"/>
+                            <span className="icon-text">Leaderboard</span>
+                        </div>
+                    </NavLink>
+                    
                 </div>
                 <div onClick={ () => this.onSignOut() } className="flex-col icon-bg logout">
                     <img src={ signOutIcon } alt="newQuestion" className="nav-icon"/>

@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import './Home.scss'
-import { BrowserRouter as Router, Link, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Link, Route, Redirect, Switch, NavLink } from 'react-router-dom'
 import QuestionList from '../questionList/QuestionList.js'
 import { connect } from 'react-redux'
+import { ReactReduxContext } from 'react-redux'
 
 class Home extends Component {
 
@@ -45,7 +46,6 @@ class Home extends Component {
         });
 
         this.sortList(answeredQuestions)
-
         return {
             answeredQuestions,
             unansweredQuestions
@@ -73,34 +73,33 @@ class Home extends Component {
     render() {
         return (
             <div className="home-body flex-col">
-                <Router>
-                    <div className="link-holder flex-row">
-                        <Link 
-                            className={ this.state.pathIndex === 1 ? "active" : undefined } 
-                            onClick={ () => {
-                                this.setState({ pathIndex: 1 })
-                        } } to="/home/unanswered">Unanswered Questions</Link>
-                        <Link 
-                            className={ this.state.pathIndex === 2 ? "active" : undefined } 
-                            onClick={ () => {
-                                this.setState({ pathIndex: 2 })
-                        } } to="/home/answered">Answered Questions</Link>
-                    </div>
-
+                <div className="link-holder flex-row">
+                    <NavLink 
+                        activeClassName="active"
+                        onClick={ () => {
+                            this.setState({ pathIndex: 1 })
+                    } } to="/home/unanswered">Unanswered Questions</NavLink>
+                    <NavLink 
+                        activeClassName="active" 
+                        onClick={ () => {
+                            this.setState({ pathIndex: 2 })
+                    } } to="/home/answered">Answered Questions</NavLink>
+                </div>
+                <Switch>
                     <Route render={() => (
                         <QuestionList 
                             answered={ false }
-                            questions={ this.handleChanges().unansweredQuestions } />
-                    )} exact path="/home/unanswered"></Route>
-
+                            questions={ this.handleChanges().unansweredQuestions }
+                            onQuestionExpand={ this.props.onQuestionExpand } />
+                    )} path="/home/unanswered"></Route>
                     <Route render={() => (
                         <QuestionList 
                             answered={ true }
-                            questions={ this.handleChanges().answeredQuestions } />
-                    )} exact path="/home/answered"></Route>
-
-                    <Redirect to="/home/unanswered" />
-                </Router>
+                            questions={ this.handleChanges().answeredQuestions }
+                            onQuestionExpand={ this.props.onQuestionExpand } />
+                    )} path="/home/answered"></Route>
+                </Switch>
+                <Redirect to="/home/unanswered" />
             </div>
         )
     }

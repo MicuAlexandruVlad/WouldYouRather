@@ -59,6 +59,18 @@ $secondary: #FFB742;
                 }
             }
         }
+
+        .expand {
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+            margin-left: auto;
+            cursor: pointer;
+        }
+
+        .hidden {
+            visibility: hidden;
+        }
     }
 
     .answers-holder {

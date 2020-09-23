@@ -9,6 +9,7 @@ import Api from '../../utils/Api.js'
 import { errorNotif, successNotif } from '../../utils/NotifManager.js'
 import { updateUser } from '../../actions/users';
 import { updateEntry } from '../../actions/leaderboardEntries';
+import { withRouter } from 'react-router-dom';
 
 class NewQuestion extends Component {
 
@@ -64,6 +65,7 @@ class NewQuestion extends Component {
                 createdQuestions: this.props.user.createdQuestions,
                 totalScore: this.props.user.answeredQuestionsCount + this.props.user.createdQuestions,
             }))
+            this.props.history.push('/home/unanswered')
         }
     }
 
@@ -101,4 +103,4 @@ const mapState = (appState) => {
     }
 }
 
-export default connect(mapState)(NewQuestion)
+export default withRouter(connect(mapState)(NewQuestion))

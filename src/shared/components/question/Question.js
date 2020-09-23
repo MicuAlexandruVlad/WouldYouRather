@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './Question.scss'
 import Radio from '@material-ui/core/Radio';
+import expandIcon from '../../../assets/expand.png'
 import { connect } from 'react-redux';
 import { updateUser } from '../../../actions/users';
 import { updateQuestion } from '../../../actions/questions';
@@ -82,24 +83,29 @@ class Question extends Component {
             question.secondOptionVotes++
         }
         this.computePercentage(question)
-        this.props.dispatch(updateUser({
-            answeredQuestions: this.props.user.answeredQuestions.push(this.props.question.id),
-            pickedOptions: this.props.user.pickedOptions.push(option),
-            answeredQuestionsCount: this.props.user.answeredQuestionsCount++,
-            createdQuestions: this.props.user.createdQuestions
-        }))
-        this.props.dispatch(updateEntry({
-            id: this.props.user.id,
-            answeredQuestions: this.props.user.answeredQuestionsCount,
-            createdQuestions: this.props.user.createdQuestions,
-            totalScore: this.props.user.answeredQuestionsCount + this.props.user.createdQuestions,
-        }))
 
+        this.props.dispatch(updateQuestion(question))
         setTimeout(() => {
             // TODO: after user picks option, move the question to answered questions after 5s or so
             
-            this.props.dispatch(updateQuestion(question))
+            this.props.dispatch(updateUser({
+                answeredQuestions: this.props.user.answeredQuestions.push(this.props.question.id),
+                pickedOptions: this.props.user.pickedOptions.push(option),
+                answeredQuestionsCount: this.props.user.answeredQuestionsCount++,
+                createdQuestions: this.props.user.createdQuestions
+            }))
+
+            this.props.dispatch(updateEntry({
+                id: this.props.user.id,
+                answeredQuestions: this.props.user.answeredQuestionsCount,
+                createdQuestions: this.props.user.createdQuestions,
+                totalScore: this.props.user.answeredQuestionsCount + this.props.user.createdQuestions,
+            }))
         }, 5000);
+    }
+
+    onExpand() {
+        this.props.onQuestionExpand(this.props.question.id)
     }
 
     render() {
@@ -121,6 +127,12 @@ class Question extends Component {
                             }</span>
                         </div>
                     </div>
+                    <img 
+                        onClick={ () => this.onExpand() } 
+                        src={ expandIcon } 
+                        alt="expand" 
+                        className={ this.props.showExpand ? "expand" : "expand hidden" }
+                        />
                 </div>
                 <div className="answers-holder flex-col">
                     <div className="answer-row flex-row">

@@ -11,7 +11,9 @@ export default class QuestionList extends Component {
                         key={ question.id }
                         answered={ this.props.answered }
                         question={ question }
-                        />
+                        showExpand={ true }
+                        onQuestionExpand={ this.props.onQuestionExpand }
+                />
                 )) }
             </div>
         )

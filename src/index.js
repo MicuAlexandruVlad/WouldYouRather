@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from '../src/components/App.js';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { applyMiddleware, createStore } from 'redux'
 import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
@@ -13,11 +13,11 @@ import logger from './middleware/logger'
 const store = createStore(reducer, applyMiddleware(thunk, logger))
 
 ReactDOM.render(
-  <BrowserRouter>
+  <Router>
     <Provider store={ store }>
       <App />
     </Provider>
-  </BrowserRouter>,
+  </Router>,
   document.getElementById('root')
 );
 

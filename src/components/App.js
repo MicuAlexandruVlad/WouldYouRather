@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Link, Route, Redirect, Switch, withRouter } from 'react-router-dom';
+import { Link, Route, Redirect, BrowserRouter, withRouter } from 'react-router-dom';
 import '../components/App.scss';
 import LoginNav from '../components/loginNav/LoginNav.js'
 import Main from '../components/main/Main.js'
-import * as $ from 'jquery'
 import ReactNotification from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 import { connect } from 'react-redux';
 import { handleData } from '../actions/shared.js'
 import { signOutUser } from '../actions/users.js'
+import { Switch } from 'react-router-dom';
 
 class App extends Component {
 
@@ -16,11 +16,10 @@ class App extends Component {
     
     console.log(localStorage.getItem("auth-id"))
     console.log(this.checkForAuthUser())
-    if (!this.checkForAuthUser()) {
-      this.navLogin()
-    } else {
+    // console.log(this.props.user)
+    if (this.checkForAuthUser()) {
       this.props.dispatch(handleData(localStorage.getItem('auth-id')))
-      this.navMain()
+      // this.navMain()
     }
   } 
 
@@ -34,24 +33,23 @@ class App extends Component {
     console.log('Sign out')
     localStorage.removeItem('auth-id')
     this.props.dispatch(signOutUser())
-    this.navLogin()
+    // this.navLogin()
   }
 
   render() {
     return (
       <div className="App">
         <ReactNotification />
+        <Link id="mainLink" to="/"></Link>
         <Link id="loginNavLink" to="/nav"></Link>
-        <Link id="mainLink" to="/main"></Link>
-          
 
-          <Switch>
+        <Switch>
             <Route render={() => (
               <LoginNav onSuccess={ this.handleSuccessfulLogin } />
-            )} exact path="/nav"></Route>
+            )} path="/nav"></Route>
             <Route render={() => (
-              <Main onSignOut={ this.handleSignOut } />
-            )} exact path="/main"></Route>
+              this.checkForAuthUser() ? <Main onSignOut={ this.handleSignOut } /> : <Redirect to="/nav" />
+            )} path="/"></Route>
           </Switch>
       </div>
     )
@@ -64,14 +62,16 @@ class App extends Component {
 
     return true
   }
-
-  navLogin() {
-    $("#loginNavLink")[0].click()
-  }
-
+  
   navMain() {
-    $("#mainLink")[0].click()
+    this.props.history.push('/home/unanswered')
   }
 }
 
-export default connect()(withRouter(App))
+const mapState = appState => {
+  return {
+    user: appState.users
+  }
+}
+
+export default withRouter(connect(mapState)(App))
