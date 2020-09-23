@@ -5,14 +5,13 @@ import newQuestionIcon from '../../assets/new_question.png'
 import signOutIcon from '../../assets/logout.png'
 import leaderboardIcon from '../../assets/leaderboard.png'
 import homeIcon from '../../assets/home.png'
-import * as $ from 'jquery'
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 export default class SideNav extends Component {
 

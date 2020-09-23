@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import './Main.scss'
 import SideNav from '../sideNav/SideNav.js'
-import { Link, NavLink, Redirect, Route, Switch, withRouter } from 'react-router-dom'
+import { Route, Switch, withRouter } from 'react-router-dom'
 import Home from '../home/Home.js'
 import NewQuestion from '../newQuestion/NewQuestion.js'
 import Leaderboard from '../leaderboard/Leaderboard.js'
 import SingleQuestions from '../singleQuestion/SingleQuestion'
 import { ReactReduxContext } from 'react-redux'
-import $ from 'jquery'
 
 class Main extends Component {
     handleSignOut = () => {

@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import './Home.scss'
-import { BrowserRouter as Router, Link, Route, Redirect, Switch, NavLink } from 'react-router-dom'
+import { Route, Redirect, Switch, NavLink } from 'react-router-dom'
 import QuestionList from '../questionList/QuestionList.js'
 import { connect } from 'react-redux'
-import { ReactReduxContext } from 'react-redux'
 
 class Home extends Component {
 

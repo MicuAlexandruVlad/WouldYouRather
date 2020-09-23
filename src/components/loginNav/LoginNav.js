@@ -3,8 +3,7 @@ import './LoginNav.scss'
 import Login from '../login/Login.js'
 import Register from '../register/Register.js'
 import logo from '../../assets/logo.png'
-import { 
-    Link, 
+import {  
     Route, 
     Redirect,
     Switch, withRouter, NavLink

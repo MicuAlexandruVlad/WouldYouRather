@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link, Route, Redirect, BrowserRouter, withRouter } from 'react-router-dom';
+import { Link, Route, Redirect, withRouter } from 'react-router-dom';
 import '../components/App.scss';
 import LoginNav from '../components/loginNav/LoginNav.js'
 import Main from '../components/main/Main.js'
